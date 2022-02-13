@@ -1,0 +1,20 @@
+{
+    "name": "shakilahmmed/prep",
+    "description": "DS AND ALGO PREP",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shakilahmmed\\Prep\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require-dev": {
+        "pestphp/pest": "dev-master"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
