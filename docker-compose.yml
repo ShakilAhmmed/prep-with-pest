@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  web:
+    image: nginx:latest
+    container_name: prep-with-pest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html:cached
+      - ./.docker/nginx:/etc/nginx/conf.d
+    networks:
+      - prep-with-pest-network
+    depends_on:
+      - app
+  app:
+    build:
+      args:
+        user: Shakil
+        uid: 1000
+      context: .
+      dockerfile: Dockerfile
+    image: bee-stack
+    container_name: prep-with-pest-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html:cached
+      - ./.docker/app/php-fpm.ini:/usr/local/etc/php/conf.d/99-app.ini
+    networks:
+      - prep-with-pest-network
+networks:
+  prep-with-pest-network:
+    driver: bridge
+
+volumes:
+  prep-with-pest-volume:
+    driver: local
